@@ -1,0 +1,6 @@
+<div class="bookmark-container">
+  <h2>{{bookmarks.label}}</h2>
+  <ul>
+    <li *ngFor="let link of bookmarks.links"><a href="{{link.url}}" target="_blank">{{link.label}}</a></li>
+  </ul>
+</div>

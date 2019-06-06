@@ -1,0 +1,17 @@
+ul {
+	list-style: none;
+	padding-left: 0px;
+}
+
+a,
+a:visited {
+	color: #AAA;
+	padding-left: 0px;
+	transition: padding-left 50ms ease-in-out;
+}
+
+a:hover {
+	color: #888;
+	padding-left: 4px;
+	transition: padding-left 50ms ease-in-out;
+}
