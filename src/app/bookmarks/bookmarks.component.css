@@ -15,3 +15,31 @@ a:hover {
 	padding-left: 4px;
 	transition: padding-left 50ms ease-in-out;
 }
+
+.red {
+	color: #E44;
+}
+
+.green {
+	color: #4E4;
+}
+
+.blue {
+	color: #44E;
+}
+
+.purple {
+	color: #E4E;
+}
+
+.cyan {
+	color: #4EE;
+}
+
+.yellow {
+	color: #EE4;
+}
+
+.white {
+	color: #EEE;
+}
