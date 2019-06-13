@@ -73,7 +73,7 @@ export class AppComponent {
       label: 'Social Media',
       color: 'blue',
       links: [
-        { url: 'https://hangouts.google.com/', label: 'Reddit'},
+        { url: 'https://reddit.com/', label: 'Reddit'},
         { url: 'https://twitter.com/', label: 'Twitter'},
         { url: 'https://news.ycombinator.com/', label: 'Hacker News'},
       ]
