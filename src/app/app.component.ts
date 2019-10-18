@@ -14,7 +14,7 @@ export class AppComponent {
       color: 'red',
       links: [
         { url: 'https://codeacademy.com', label: 'Code Academy'},
-        { url: 'https://khanacademy.com', label: 'Khan Academy'},
+        { url: 'https://khanacademy.org', label: 'Khan Academy'},
         { url: 'https://udemy.com', label: 'Udemy'},
         { url: 'https://stackskills.com', label: 'Stack Skills'},
         { url: 'https://code.org', label: 'Code.org'},
@@ -30,7 +30,7 @@ export class AppComponent {
         { url: 'https://github.com', label: 'GitHub'},
         { url: 'https://stackoverflow.com', label: 'StackOverflow'},
         { url: 'https://hackerrank.com', label: 'Hacker Rank'},
-        { url: 'https://codewars.com', label: 'Code Wars'},
+        { url: 'https://codewars.com', label: 'Code Wars'}
       ]
     },
     {
@@ -57,6 +57,7 @@ export class AppComponent {
         { url: 'http://10.0.0.201:8080', label: 'Jenkins'},
         { url: 'http://10.0.0.120:2202', label: 'Ubooquity'},
         { url: 'http://10.0.0.4/admin', label: 'PiHole'},
+        { url: 'http://10.0.0.199:3000', label: 'OWASP Juice Shop'}
       ]
     },
     {
@@ -67,15 +68,20 @@ export class AppComponent {
         { url: 'http://weather.cod.edu/satrad/exper', label: 'GOES-16'},
         { url: 'https://weather.com', label: 'Weather.com'},
         { url: 'https://www.wunderground.com/wundermap', label: 'Wundermap'},
+        { url: 'https://arxiv.org', label: 'arXiv'},
+        { url: 'https://trello.com', label: 'Trello'}
       ]
     },
     {
-      label: 'Social Media',
+      label: 'News',
       color: 'blue',
       links: [
-        { url: 'https://reddit.com/', label: 'Reddit'},
-        { url: 'https://twitter.com/', label: 'Twitter'},
-        { url: 'https://news.ycombinator.com/', label: 'Hacker News'},
+        { url: 'https://npr.org', label: 'NPR'},
+        { url: 'https://dzone.com', label: 'DZone'},
+        { url: 'https://news.ycombinator.com', label: 'Hacker News'},
+        { url: 'https://techcrunch.com', label: 'TechCrunch'},
+        { url: 'https://www.sciencemag.org/', label: 'Science Magazine'},
+        { url: 'https://www.sciencenews.org/', label: 'Science News'}
       ]
     },
     {
@@ -92,8 +98,9 @@ export class AppComponent {
       links: [
         { url: 'https://synaptiklabs.com', label: 'Synaptik Labs'},
         { url: 'https://wilwheaton.net', label: 'Wil Wheaton'},
-        { url: 'https://techcrunch.com', label: 'TechCrunch'},
         { url: 'https://hackernoon.com', label: 'HackerNoon'},
+        { url: 'https://code.fb.com/', label: 'Facebook Code'},
+        { url: 'https://medium.com/netflix-techblog', label: 'Netflix Blog'}
       ]
     }
   ];
