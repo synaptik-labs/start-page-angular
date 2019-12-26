@@ -1,0 +1,19 @@
+.topbar {
+	display: flex;
+	flex-direction: row;
+	padding: 4px;
+	background-color: #222;
+}
+
+.topbar .title {
+	flex: 2;
+	padding-left: 4rem;
+}
+
+.topbar .actions {
+	display: flex;
+	flex: 1;
+	align-self: center;
+	justify-content: flex-end;
+	padding-right: 2rem;
+}
