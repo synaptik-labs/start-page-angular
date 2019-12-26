@@ -10,6 +10,9 @@ class BookmarksComponent implements OnInit {
 	@Input()
 	public bookmarks: BookmarkGroup;
 
+	@Input()
+	public editing: boolean;
+
 	constructor() {}
 
 	public ngOnInit(): void {

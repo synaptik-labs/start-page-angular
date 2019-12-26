@@ -1,0 +1,12 @@
+<div class="bookmarks-container">
+  <ng-container *ngIf="loading">
+    Loading...
+  </ng-container>
+  <ng-container *ngIf="!loading">
+    <app-bookmarks *ngFor="let bookmarks of bookmarkGroups" [bookmarks]="bookmarks" editing="true"></app-bookmarks>
+    <div class="add-container" (click)="clickAdd()">
+      <mat-icon>add</mat-icon>
+      <div>Add Group</div>
+    </div>
+  </ng-container>
+</div>

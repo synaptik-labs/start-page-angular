@@ -1,8 +1,11 @@
 <div class="topbar">
 	<h2 class="title">Welcome</h2>
 	<div class="actions">
-		<button mat-mini-fab aria-label="Edit icon" (click)="clickEdit()">
+		<button *ngIf="!editing" mat-mini-fab aria-label="Edit icon" (click)="clickEdit()">
 			<mat-icon>edit</mat-icon>
+		</button>
+		<button *ngIf="editing" mat-mini-fab aria-label="Done icon" (click)="clickDone()">
+			<mat-icon>done</mat-icon>
 		</button>
 	</div>
 </div>

@@ -13,11 +13,13 @@ import { TopbarComponent } from './topbar/topbar.component';
 
 import { BookmarkService } from './services/bookmark.service';
 import { StorageService } from './services/storage.service';
+import { EditComponent } from './edit/edit.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		HomeComponent,
+		EditComponent,
 		BookmarksComponent,
 		TopbarComponent
 	],

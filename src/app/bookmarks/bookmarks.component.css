@@ -1,3 +1,13 @@
+.editable {
+	display: flex;
+	flex-direction: column;
+	padding: .5rem;
+	border-radius: 8px;
+	border: 6px dashed #222;
+	width: 14rem;
+	height: 20rem;
+}
+
 ul {
 	list-style: none;
 	padding-left: 0px;
