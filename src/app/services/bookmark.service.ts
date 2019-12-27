@@ -10,18 +10,14 @@ class BookmarkLink {
 
 	constructor(input?: BookmarkLink) {
 		if (input) {
-			this.copy(input);
+			this.url = input.url;
+			this.label = input.label;
+			this.icon = input.icon;
 		} else {
 			this.url = '';
 			this.label = '';
 			this.icon = '';
 		}
-	}
-
-	public copy(input: BookmarkLink): void {
-		this.url = input.url;
-		this.label = input.label;
-		this.icon = input.icon;
 	}
 }
 class BookmarkGroup {

@@ -38,7 +38,10 @@ class LinkDialogComponent {
 			this.shadowLink.icon = this.shadowLink.url + '/favicon.ico';
 		}
 
-		this.data.link.copy(this.shadowLink);
+		this.data.link.url = this.shadowLink.url;
+		this.data.link.label = this.shadowLink.label;
+		this.data.link.icon = this.shadowLink.icon;
+
 		this.dialogRef.close('save');
 	}
 }
