@@ -6,11 +6,34 @@
 	border: 6px dashed #222;
 	width: 14rem;
 	height: 20rem;
+	color: #999;
+}
+
+.top-form-content {
+	display: grid;
+	grid-template-columns: 80% 20%;
+	align-items: center;
 }
 
 ul {
 	list-style: none;
 	padding-left: 0px;
+}
+
+ul li {
+	display: flex;
+}
+
+.link-data {
+	padding-left: 8px;
+	flex: 9;
+	cursor: pointer;
+}
+
+.link-delete {
+	flex: 1;
+	cursor: pointer;
+	color: red;
 }
 
 a,

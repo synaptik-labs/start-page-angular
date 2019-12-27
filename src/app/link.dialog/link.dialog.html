@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>{{editing ? 'Edit' : 'Add'}} Link</h1>
+<div mat-dialog-content>
+	<mat-form-field>
+		<input matInput placeholder="Link Label" name="shadowLink.label" [(ngModel)]="shadowLink.label">
+	</mat-form-field>
+	<mat-form-field>
+		<input matInput placeholder="Link URL" name="shadowLink.url" [(ngModel)]="shadowLink.url">
+	</mat-form-field>
+	<mat-form-field>
+		<input matInput placeholder="Link Icon" name="shadowLink.icon" [(ngModel)]="shadowLink.icon">
+	</mat-form-field>
+</div>
+<div mat-dialog-actions>
+	<button mat-button (click)="onCancelClick()">Cancel</button>
+	<button mat-button (click)="onSaveClick()">Save</button>
+</div>

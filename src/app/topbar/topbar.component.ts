@@ -1,16 +1,17 @@
 import { Component, AfterViewInit, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { BookmarkService } from '../services/bookmark.service';
 
 @Component({
 	selector: 'app-topbar',
 	templateUrl: './topbar.component.html',
-	styleUrls: ['./topbar.component.css']
+	styleUrls: ['./topbar.component.scss']
 })
 class TopbarComponent implements OnInit {
 	public editing: boolean;
 
-	constructor(private router: Router, private location: Location) { }
+	constructor(private router: Router, private location: Location, private bookmarkService: BookmarkService) { }
 
 	public ngOnInit(): void {
 		this.editing = this.location.path(false) === '/edit';
@@ -22,6 +23,7 @@ class TopbarComponent implements OnInit {
 	}
 
 	public clickDone(): void {
+		this.bookmarkService.saveBookmarks();
 		this.router.navigate(['/']);
 		this.editing = false;
 	}

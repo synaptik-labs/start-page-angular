@@ -5,7 +5,7 @@ import { BaseComponent } from '../base.component';
 @Component({
 	selector: 'app-home',
 	templateUrl: './home.component.html',
-	styleUrls: ['./home.component.css']
+	styleUrls: ['./home.component.scss']
 })
 class HomeComponent extends BaseComponent implements OnInit {
 	public loading: boolean;

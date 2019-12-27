@@ -5,7 +5,7 @@ import { BaseComponent } from '../base.component';
 @Component({
 	selector: 'app-edit',
 	templateUrl: './edit.component.html',
-	styleUrls: ['./edit.component.css']
+	styleUrls: ['./edit.component.scss']
 })
 class EditComponent extends BaseComponent implements OnInit {
 	public loading: boolean;
@@ -26,6 +26,15 @@ class EditComponent extends BaseComponent implements OnInit {
 
 	public clickAdd(): void {
 		this.bookmarkGroups.push(new BookmarkGroup());
+	}
+
+	public doRemoveGroup(group: BookmarkGroup): void {
+		for (let i: number = 0; i < this.bookmarkGroups.length; i ++) {
+			if (this.bookmarkGroups[i].label === group.label) {
+				this.bookmarkGroups.splice(i, 1);
+				break;
+			}
+		}
 	}
 }
 

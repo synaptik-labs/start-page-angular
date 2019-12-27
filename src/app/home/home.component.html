@@ -3,7 +3,7 @@
     Loading...
   </ng-container>
   <ng-container *ngIf="!loading">
-		<app-bookmarks *ngFor="let bookmarks of bookmarkGroups" [bookmarks]="bookmarks"></app-bookmarks>
+		<app-bookmarks *ngFor="let bookmarkGroup of bookmarkGroups" [(bookmarkGroup)]="bookmarkGroup"></app-bookmarks>
 		<div class="noBookmarks" *ngIf="bookmarkGroups.length === 0">
 			No bookmarks! Create some!
 		</div>
