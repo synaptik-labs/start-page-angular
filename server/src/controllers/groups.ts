@@ -5,17 +5,32 @@ import { Logger } from '../logger';
 @Route('/groups')
 export class GroupController {
 
-	@Get('{groupGroupName}')
-	public async getGroups(groupGroupName:string) {
+	@Get('{tagName}')
+	public async getGroups(tagName:string) {
 		let result: any = [];
-		const groupGroup: any = await Db.query(`SELECT * FROM group_groups WHERE name = '${groupGroupName}'`);
-		if (groupGroup[0]) {
-			Logger.info(`groupGroup: `, groupGroup);
-			result = await Db.query(`SELECT * FROM \`groups\` WHERE group_groups_id = ${groupGroup[0].id}`);
-		} else {
-			const newGroupGroup: any = await Db.query(`INSERT INTO group_groups (name) VALUES ('${groupGroupName}')`);
-			Logger.info(`newGroupGroup: `, newGroupGroup);
-			result = [];
+
+		let resultSet: any = await Db.query(`SELECT * FROM \`groups\` WHERE tag = ?`, [tagName]);
+		if (resultSet) {
+			const bookmarkGroup: any = {};
+			for (let idx = 0; idx < resultSet.length; idx ++) {
+				const group_id: number = resultSet[idx].id;
+				bookmarkGroup.id = group_id;
+				bookmarkGroup.label = resultSet[idx].label;
+				bookmarkGroup.color = resultSet[idx].color;
+				bookmarkGroup.links = [];
+				let linksResultSet: any = await Db.query(`SELECT * FROM links WHERE group_id = ?`, [group_id]);
+				if (linksResultSet) {
+					for (let idx2 = 0; idx2 < linksResultSet.length; idx2 ++) {
+						const link: any = {};
+						link.id = linksResultSet[idx2].id;
+						link.label = linksResultSet[idx2].label;
+						link.url = linksResultSet[idx2].url;
+						link.icon = linksResultSet[idx2].icon;
+						bookmarkGroup.links.push(link);
+					}
+				}
+				result.push(bookmarkGroup);
+			}
 		}
 
 		return result;

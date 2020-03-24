@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BookmarkGroup, BookmarkService } from '../services/bookmark.service';
 import { BaseComponent } from '../base.component';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
 	selector: 'app-home',
@@ -12,16 +13,24 @@ class HomeComponent extends BaseComponent implements OnInit {
 
 	public bookmarkGroups: Array<BookmarkGroup> = [];
 
-	constructor(private bookmarkService: BookmarkService) {
+	constructor(private route: ActivatedRoute, private bookmarkService: BookmarkService) {
 		super();
 	}
 
 	public ngOnInit(): void {
 		this.loading = true;
-		this.cleanup.push(this.bookmarkService.getBookmarks().subscribe((bookmarks: Array<BookmarkGroup>) => {
-			this.bookmarkGroups = bookmarks;
-			this.loading = false;
-		}));
+
+		this.route.params.subscribe((params: Params) => {
+			let tag: string = params.tag;
+			if (!tag) {
+				tag = 'home';
+			}
+
+			this.cleanup.push(this.bookmarkService.getBookmarks(tag).subscribe((bookmarks: Array<BookmarkGroup>) => {
+				this.bookmarkGroups = bookmarks;
+				this.loading = false;
+			}));
+		});
 	}
 
 }

@@ -18,7 +18,7 @@ class EditComponent extends BaseComponent implements OnInit {
 
 	public ngOnInit(): void {
 		this.loading = true;
-		this.cleanup.push(this.bookmarkService.getBookmarks().subscribe((bookmarks: Array<BookmarkGroup>) => {
+		this.cleanup.push(this.bookmarkService.getBookmarks(undefined).subscribe((bookmarks: Array<BookmarkGroup>) => {
 			this.bookmarkGroups = bookmarks;
 			this.loading = false;
 		}));

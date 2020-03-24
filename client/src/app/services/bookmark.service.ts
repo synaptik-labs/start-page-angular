@@ -2,6 +2,7 @@ import { StorageService } from './storage.service';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 class BookmarkLink {
 	public url: string;
@@ -36,25 +37,17 @@ class BookmarkGroup {
 class BookmarkService {
 	private cachedBookmarks: Array<BookmarkGroup>;
 
-	constructor(private storage: StorageService) {
+	constructor(private http: HttpClient) {
 	}
 
-	public getBookmarks(): Observable<Array<BookmarkGroup>> {
-		if (this.cachedBookmarks) {
-			return of(this.cachedBookmarks);
-		}
-		return this.storage.get('bookmarks').pipe(map((data: any) => {
-			if (!data) {
-				this.cachedBookmarks = [];
-			} else {
-				this.cachedBookmarks = JSON.parse(data);
-			}
-			return this.cachedBookmarks;
+	public getBookmarks(tag: string): Observable<Array<BookmarkGroup>> {
+		return this.http.get(`http://localhost:8080/api/groups/${tag}`).pipe(map((data: any) => {
+			return data;
 		}));
 	}
 
 	public setBookmarks(bookmarks: Array<BookmarkGroup>): Observable<void> {
-		return this.storage.set('bookmarks', JSON.stringify(bookmarks));
+		return of();
 	}
 
 	public saveBookmarks(): Observable<void> {
