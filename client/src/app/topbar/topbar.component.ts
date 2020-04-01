@@ -1,5 +1,5 @@
-import { Component, AfterViewInit, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { BookmarkService } from '../services/bookmark.service';
 
@@ -11,10 +11,21 @@ import { BookmarkService } from '../services/bookmark.service';
 class TopbarComponent implements OnInit {
 	public editing: boolean;
 
-	constructor(private router: Router, private location: Location, private bookmarkService: BookmarkService) { }
+	private tag: string;
+
+	constructor(
+		private router: Router, private route: ActivatedRoute, private location: Location,
+		private bookmarkService: BookmarkService) { }
 
 	public ngOnInit(): void {
 		this.editing = this.location.path(false) === '/edit';
+
+		this.route.params.subscribe((params: Params) => {
+			this.tag = params.tag;
+			if (!this.tag) {
+				this.tag = 'home';
+			}
+		});
 	}
 
 	public clickEdit(): void {
@@ -23,7 +34,7 @@ class TopbarComponent implements OnInit {
 	}
 
 	public clickDone(): void {
-		this.bookmarkService.saveBookmarks();
+		this.bookmarkService.saveBookmarks(this.tag);
 		this.router.navigate(['/']);
 		this.editing = false;
 	}

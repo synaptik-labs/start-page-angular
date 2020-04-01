@@ -41,17 +41,21 @@ class BookmarkService {
 	}
 
 	public getBookmarks(tag: string): Observable<Array<BookmarkGroup>> {
-		return this.http.get(`http://localhost:8080/api/groups/${tag}`).pipe(map((data: any) => {
+		if (this.cachedBookmarks) {
+			return of(this.cachedBookmarks);
+		}
+		return this.http.get<Array<BookmarkGroup>>(`http://localhost:8080/api/tags/${tag}`).pipe(map((data: Array<BookmarkGroup>) => {
+			this.cachedBookmarks = data;
 			return data;
 		}));
 	}
 
-	public setBookmarks(bookmarks: Array<BookmarkGroup>): Observable<void> {
-		return of();
+	public setBookmarks(bookmarks: Array<BookmarkGroup>): void {
+		this.cachedBookmarks = bookmarks;
 	}
 
-	public saveBookmarks(): Observable<void> {
-		return this.setBookmarks(this.cachedBookmarks);
+	public saveBookmarks(tag: string): Observable<any> {
+		return this.http.post(`http://localhost:8080/api/tags/${tag}`, this.cachedBookmarks);
 	}
 }
 

@@ -5,7 +5,9 @@ import { EditComponent } from './edit/edit.component';
 
 const routes: Routes = [
 	{ path: '', component: HomeComponent },
+	{ path: 'edit', component: EditComponent },
 	{ path: ':tag', component: HomeComponent },
+	{ path: ':tag/edit', component: EditComponent },
 	{ path: '**', redirectTo: '' }
 ];
 

@@ -3,7 +3,8 @@ import * as bodyParser  from 'body-parser';
 import * as cors  from 'cors';
 import { RegisterRoutes } from './routes';
 
-import './controllers/groups';
+import './controllers/tag.controller';
+import './controllers/group.controller';
 
 export class Main {
 	public express: express.Express;
