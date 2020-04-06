@@ -1,4 +1,4 @@
-import { Get, Route, Post, Body, Path } from 'tsoa';
+import { Get, Route } from 'tsoa';
 import { Db } from '../db';
 import { BookmarkGroup, BookmarkLink } from './group.controller';
 
@@ -11,12 +11,13 @@ export class TagController {
 
 		let resultSet: any = await Db.query(`SELECT * FROM \`groups\` WHERE tag = ?`, [tagName]);
 		if (resultSet) {
-			const bookmarkGroup: BookmarkGroup = new BookmarkGroup();
 			for (let idx = 0; idx < resultSet.length; idx ++) {
+				const bookmarkGroup: BookmarkGroup = new BookmarkGroup();
 				const group_id: number = resultSet[idx].id;
 				bookmarkGroup.id = group_id;
 				bookmarkGroup.label = resultSet[idx].label;
 				bookmarkGroup.color = resultSet[idx].color;
+				bookmarkGroup.tag = resultSet[idx].tag;
 				bookmarkGroup.links = [];
 				let linksResultSet: any = await Db.query(`SELECT * FROM links WHERE group_id = ?`, [group_id]);
 				if (linksResultSet) {
@@ -35,10 +36,4 @@ export class TagController {
 
 		return result;
 	}
-
-	@Post('{tagName}')
-	public async create(@Path() tagName:string, @Body() data): Promise<any> {
-		console.log(data);
-	}
-
 }

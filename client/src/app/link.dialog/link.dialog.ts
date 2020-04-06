@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { BookmarkLink } from '../services/bookmark.service';
+import { BookmarkLink } from '../services/bookmark.link.service';
 
 export interface DialogData {
 	link: BookmarkLink;

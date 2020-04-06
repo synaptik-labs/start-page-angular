@@ -34,7 +34,6 @@ class TopbarComponent implements OnInit {
 	}
 
 	public clickDone(): void {
-		this.bookmarkService.saveBookmarks(this.tag);
 		this.router.navigate(['/']);
 		this.editing = false;
 	}

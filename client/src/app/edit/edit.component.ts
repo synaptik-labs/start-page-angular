@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { BookmarkGroup, BookmarkService } from '../services/bookmark.service';
+import { BookmarkService } from '../services/bookmark.service';
 import { BaseComponent } from '../base.component';
 import { ActivatedRoute, Params } from '@angular/router';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { GroupDialogComponent } from '../group.dialog/group.dialog';
+import { BookmarkGroupService, BookmarkGroup } from '../services/bookmark.group.service';
 
 @Component({
 	selector: 'app-edit',
@@ -10,10 +13,13 @@ import { ActivatedRoute, Params } from '@angular/router';
 })
 class EditComponent extends BaseComponent implements OnInit {
 	public loading: boolean;
+	private tag: string;
 
 	public bookmarkGroups: Array<BookmarkGroup> = [];
 
-	constructor(private route: ActivatedRoute, private bookmarkService: BookmarkService) {
+	constructor(
+		private route: ActivatedRoute, private bookmarkService: BookmarkService,
+		private bookmarkGroupService: BookmarkGroupService, private dialog: MatDialog) {
 		super();
 	}
 
@@ -21,12 +27,12 @@ class EditComponent extends BaseComponent implements OnInit {
 		this.loading = true;
 
 		this.route.params.subscribe((params: Params) => {
-			let tag: string = params.tag;
-			if (!tag) {
-				tag = 'home';
+			this.tag = params.tag;
+			if (!this.tag) {
+				this.tag = 'home';
 			}
 
-			this.cleanup.push(this.bookmarkService.getBookmarks(tag).subscribe((bookmarks: Array<BookmarkGroup>) => {
+			this.cleanup.push(this.bookmarkService.getBookmarks(this.tag).subscribe((bookmarks: Array<BookmarkGroup>) => {
 				this.bookmarkGroups = bookmarks;
 				this.loading = false;
 			}));
@@ -34,7 +40,22 @@ class EditComponent extends BaseComponent implements OnInit {
 	}
 
 	public clickAdd(): void {
-		this.bookmarkGroups.push(new BookmarkGroup());
+		const newGroup: BookmarkGroup = new BookmarkGroup();
+		this.openGroupDialog(newGroup).afterClosed().subscribe((result: string) => {
+			if (result === 'save') {
+				this.bookmarkGroupService.create(this.tag, newGroup).subscribe((group: BookmarkGroup) => {
+					this.bookmarkGroups.push(group);
+				});
+			}
+		});
+	}
+
+
+	private openGroupDialog(group: BookmarkGroup): MatDialogRef<GroupDialogComponent> {
+		return this.dialog.open(GroupDialogComponent, {
+			width: '400px',
+			data: { group }
+		});
 	}
 
 	public doRemoveGroup(group: BookmarkGroup): void {

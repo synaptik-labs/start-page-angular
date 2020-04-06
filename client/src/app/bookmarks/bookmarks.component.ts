@@ -1,14 +1,16 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { BookmarkGroup, BookmarkLink } from '../services/bookmark.service';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { LinkDialogComponent } from '../link.dialog/link.dialog';
+import { BookmarkGroup, BookmarkGroupService } from '../services/bookmark.group.service';
+import { BookmarkLink } from '../services/bookmark.link.service';
+import { BaseComponent } from '../base.component';
 
 @Component({
 	selector: 'app-bookmarks',
 	templateUrl: './bookmarks.component.html',
 	styleUrls: ['./bookmarks.component.scss']
 })
-class BookmarksComponent implements OnInit {
+class BookmarksComponent extends BaseComponent implements OnInit {
 	@Input() @Output()
 	public bookmarkGroup: BookmarkGroup;
 
@@ -20,7 +22,9 @@ class BookmarksComponent implements OnInit {
 
 	public readonly colors: Array<string> = ['red', 'green', 'blue', 'purple', 'cyan', 'yellow', 'white'];
 
-	constructor(private dialog: MatDialog) {}
+	constructor(private dialog: MatDialog, private bookmarkGroupService: BookmarkGroupService) {
+		super();
+	}
 
 	public ngOnInit(): void {
 	}
@@ -30,7 +34,9 @@ class BookmarksComponent implements OnInit {
 	}
 
 	public clickRemoveGroup(): void {
-		this.removeGroup.emit(this.bookmarkGroup);
+		this.cleanup.push(this.bookmarkGroupService.delete(this.bookmarkGroup.tag, this.bookmarkGroup).subscribe(() => {
+			this.removeGroup.emit(this.bookmarkGroup);
+		}));
 	}
 
 	public clickAddLink(): void {

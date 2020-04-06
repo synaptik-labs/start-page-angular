@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>{{editing ? 'Edit' : 'Add'}} Group</h1>
+<div mat-dialog-content>
+	<mat-form-field>
+		<input matInput placeholder="Group Label" name="shadowGroup.label" [(ngModel)]="shadowGroup.label">
+	</mat-form-field>
+	<mat-form-field>
+		<mat-label>Label Color</mat-label>
+		<mat-select [(value)]="shadowGroup.color">
+			<mat-option *ngFor="let color of colors" [value]="color">
+				{{color}}
+			</mat-option>
+		</mat-select>
+	</mat-form-field>
+</div>
+<div mat-dialog-actions>
+	<button mat-button (click)="onCancelClick()">Cancel</button>
+	<button mat-button (click)="onSaveClick()">Save</button>
+</div>

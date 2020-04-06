@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { BookmarkGroup, BookmarkService } from '../services/bookmark.service';
+import { BookmarkService } from '../services/bookmark.service';
 import { BaseComponent } from '../base.component';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { BookmarkGroup } from '../services/bookmark.group.service';
 
 @Component({
 	selector: 'app-home',

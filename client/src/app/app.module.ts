@@ -20,6 +20,9 @@ import { StorageService } from './services/storage.service';
 import { EditComponent } from './edit/edit.component';
 import { FormsModule } from '@angular/forms';
 import { LinkDialogComponent } from './link.dialog/link.dialog';
+import { GroupDialogComponent } from './group.dialog/group.dialog';
+import { BookmarkGroupService } from './services/bookmark.group.service';
+import { BookmarkLinkService } from './services/bookmark.link.service';
 
 @NgModule({
 	declarations: [
@@ -28,7 +31,8 @@ import { LinkDialogComponent } from './link.dialog/link.dialog';
 		EditComponent,
 		BookmarksComponent,
 		TopbarComponent,
-		LinkDialogComponent
+		LinkDialogComponent,
+		GroupDialogComponent
 	],
 	imports: [
 		MatButtonModule,
@@ -43,11 +47,14 @@ import { LinkDialogComponent } from './link.dialog/link.dialog';
 		BrowserAnimationsModule
 	],
 	providers: [
+		BookmarkGroupService,
+		BookmarkLinkService,
 		BookmarkService,
 		StorageService
 	],
 	entryComponents: [
-		LinkDialogComponent
+		LinkDialogComponent,
+		GroupDialogComponent
 	],
 	bootstrap: [AppComponent]
 })
