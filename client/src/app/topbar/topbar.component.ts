@@ -14,11 +14,10 @@ class TopbarComponent implements OnInit {
 	private tag: string;
 
 	constructor(
-		private router: Router, private route: ActivatedRoute, private location: Location,
-		private bookmarkService: BookmarkService) { }
+		private router: Router, private route: ActivatedRoute, private location: Location) { }
 
 	public ngOnInit(): void {
-		this.editing = this.location.path(false) === '/edit';
+		this.editing = this.location.path(false).endsWith('/edit');
 
 		this.route.params.subscribe((params: Params) => {
 			this.tag = params.tag;
@@ -29,12 +28,12 @@ class TopbarComponent implements OnInit {
 	}
 
 	public clickEdit(): void {
-		this.router.navigate(['edit']);
+		this.router.navigate([`/${this.tag}/edit`]);
 		this.editing = true;
 	}
 
 	public clickDone(): void {
-		this.router.navigate(['/']);
+		this.router.navigate([`/${this.tag}`]);
 		this.editing = false;
 	}
 }

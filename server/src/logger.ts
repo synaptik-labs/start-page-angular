@@ -20,24 +20,24 @@ export class Logger {
 		}
 	}
 
-	public static info(msg: string, ...meta: any) : void {
+	public static info(msg: string, ...meta: any[]) : void {
 		Logger.init();
-		Logger.logger.info(msg, meta);
+		Logger.logger.info(msg, ...meta);
 	}
 
-	public static debug(msg: string, ...meta: any) : void {
+	public static debug(msg: string, ...meta: any[]) : void {
 		Logger.init();
-		Logger.logger.debug(msg, meta);
+		Logger.logger.debug(msg, ...meta);
 	}
 
-	public static warn(msg: string, ...meta: any) : void {
+	public static warn(msg: string, ...meta: any[]) : void {
 		Logger.init();
-		Logger.logger.warn(msg, meta);
+		Logger.logger.warn(msg, ...meta);
 	}
 
-	public static error(msg: string, ...meta: any) : void {
+	public static error(msg: string, ...meta: any[]) : void {
 		Logger.init();
-		Logger.logger.error(msg, meta);
+		Logger.logger.error(msg, ...meta);
 	}
 
 }

@@ -1,6 +1,7 @@
 import { Get, Route } from 'tsoa';
 import { Db } from '../db';
-import { BookmarkGroup, BookmarkLink } from './group.controller';
+import { BookmarkGroup } from './group.controller';
+import { BookmarkLink } from './link.controller';
 
 @Route('/tags')
 export class TagController {

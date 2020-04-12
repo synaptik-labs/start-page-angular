@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { BookmarkGroup } from './bookmark.group.service';
 
 class BookmarkLink {
 	public id?: number;
@@ -27,21 +28,17 @@ class BookmarkLinkService {
 	constructor(private http: HttpClient) {
 	}
 
-	// public get(tag: string, id: number): Observable<BookmarkGroup> {
-	// 	return this.http.get<BookmarkGroup>(`http://localhost:8080/api/tags/${tag}/groups/${id}`);
-	// }
+	public create(group: BookmarkGroup, data: BookmarkLink): Observable<BookmarkLink> {
+		return this.http.post<BookmarkLink>(`http://localhost:8080/api/tags/${group.tag}/groups/${group.id}/links`, data);
+	}
 
-	// public create(tag: string, data: BookmarkGroup): Observable<BookmarkGroup> {
-	// 	return this.http.post<BookmarkGroup>(`http://localhost:8080/api/tags/${tag}/groups`, data);
-	// }
+	public update(group: BookmarkGroup, data: BookmarkLink): Observable<BookmarkLink> {
+		return this.http.put<BookmarkLink>(`http://localhost:8080/api/tags/${group.tag}/groups/${group.id}/links/${data.id}`, data);
+	}
 
-	// public update(tag: string, data: BookmarkGroup): Observable<BookmarkGroup> {
-	// 	return this.http.post<BookmarkGroup>(`http://localhost:8080/api/tags/${tag}/groups/${data.id}`, data);
-	// }
-
-	// public delete(tag: string): Observable<void> {
-	// 	return this.http.delete<void>(`http://localhost:8080/api/tags/${tag}/groups`);
-	// }
+	public delete(group: BookmarkGroup, data: BookmarkLink): Observable<void> {
+		return this.http.delete<void>(`http://localhost:8080/api/tags/${group.tag}/groups/${group.id}/links/${data.id}`);
+	}
 }
 
 export { BookmarkLinkService, BookmarkLink };

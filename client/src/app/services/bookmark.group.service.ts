@@ -38,7 +38,7 @@ class BookmarkGroupService {
 	}
 
 	public update(tag: string, data: BookmarkGroup): Observable<BookmarkGroup> {
-		return this.http.post<BookmarkGroup>(`http://localhost:8080/api/tags/${tag}/groups/${data.id}`, data);
+		return this.http.put<BookmarkGroup>(`http://localhost:8080/api/tags/${tag}/groups/${data.id}`, data);
 	}
 
 	public delete(tag: string, data: BookmarkGroup): Observable<void> {

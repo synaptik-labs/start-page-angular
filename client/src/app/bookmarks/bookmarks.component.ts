@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { LinkDialogComponent } from '../link.dialog/link.dialog';
 import { BookmarkGroup, BookmarkGroupService } from '../services/bookmark.group.service';
-import { BookmarkLink } from '../services/bookmark.link.service';
+import { BookmarkLink, BookmarkLinkService } from '../services/bookmark.link.service';
 import { BaseComponent } from '../base.component';
 
 @Component({
@@ -22,7 +22,10 @@ class BookmarksComponent extends BaseComponent implements OnInit {
 
 	public readonly colors: Array<string> = ['red', 'green', 'blue', 'purple', 'cyan', 'yellow', 'white'];
 
-	constructor(private dialog: MatDialog, private bookmarkGroupService: BookmarkGroupService) {
+	constructor(
+		private dialog: MatDialog,
+		private bookmarkGroupService: BookmarkGroupService,
+		private bookmarkLinkService: BookmarkLinkService) {
 		super();
 	}
 
@@ -43,13 +46,20 @@ class BookmarksComponent extends BaseComponent implements OnInit {
 		const newLink: BookmarkLink = new BookmarkLink();
 		this.openLinkDialog(newLink).afterClosed().subscribe((result: string) => {
 			if (result === 'save') {
-				this.bookmarkGroup.links.push(newLink);
+				this.cleanup.push(this.bookmarkLinkService.create(this.bookmarkGroup, newLink).subscribe((linkResult: BookmarkLink) => {
+					this.bookmarkGroup.links.push(linkResult);
+				}));
 			}
 		});
 	}
 
 	public clickEditLink(link: BookmarkLink): void {
-		this.openLinkDialog(link);
+		this.openLinkDialog(link).afterClosed().subscribe((result: string) => {
+			if (result === 'save') {
+				console.log(`link updated: `, link);
+				// this.bookmarkGroup.links.push(newLink);
+			}
+		});
 	}
 
 	private openLinkDialog(link: BookmarkLink): MatDialogRef<LinkDialogComponent> {
@@ -62,7 +72,9 @@ class BookmarksComponent extends BaseComponent implements OnInit {
 	public clickRemoveLink(link: BookmarkLink): void {
 		for (let i: number = 0; i < this.bookmarkGroup.links.length; i ++) {
 			if (this.bookmarkGroup.links[i].url === link.url) {
-				this.bookmarkGroup.links.splice(i, 1);
+				this.cleanup.push(this.bookmarkLinkService.delete(this.bookmarkGroup, link).subscribe(() => {
+					this.bookmarkGroup.links.splice(i, 1);
+				}));
 				break;
 			}
 		}
