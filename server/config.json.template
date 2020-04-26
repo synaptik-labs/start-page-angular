@@ -1,0 +1,6 @@
+{
+    "MYSQL_HOST": "127.0.0.1",
+    "MYSQL_DB": "startpage",
+    "MYSQL_USER": "startpage",
+    "MYSQL_PASSWORD": "password"
+}

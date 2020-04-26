@@ -1,5 +1,6 @@
 import * as mysql from 'mysql';
 import { Logger } from './logger';
+import { Props } from './props';
 
 export class Db {
 	private static _pool: mysql.Pool;
@@ -7,10 +8,10 @@ export class Db {
 	public static init() {
 		Db._pool = mysql.createPool({
 			connectionLimit: 10,
-			host     : '10.0.0.128',
-			user     : 'startpage',
-			password : 'password',
-			database : 'startpage'
+			host     : Props.get('MYSQL_HOST'),
+			database : Props.get('MYSQL_DB'),
+			user     : Props.get('MYSQL_USER'),
+			password : Props.get('MYSQL_PASSWORD'),
 		});
 	}
 

@@ -3,3 +3,4 @@ node_modules/
 
 client/start-page/
 server/src/routes.ts
+server/config.json

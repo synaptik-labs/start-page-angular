@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { BookmarkLink } from './bookmark.link.service';
+import { environment } from '../../environments/environment';
 
 class BookmarkGroup {
 	public id?: number;
@@ -34,15 +35,15 @@ class BookmarkGroupService {
 	}
 
 	public create(tag: string, data: BookmarkGroup): Observable<BookmarkGroup> {
-		return this.http.post<BookmarkGroup>(`http://localhost:8080/api/tags/${tag}/groups`, data);
+		return this.http.post<BookmarkGroup>(`${environment.apiUrl}/tags/${tag}/groups`, data);
 	}
 
 	public update(tag: string, data: BookmarkGroup): Observable<BookmarkGroup> {
-		return this.http.put<BookmarkGroup>(`http://localhost:8080/api/tags/${tag}/groups/${data.id}`, data);
+		return this.http.put<BookmarkGroup>(`${environment.apiUrl}/tags/${tag}/groups/${data.id}`, data);
 	}
 
 	public delete(tag: string, data: BookmarkGroup): Observable<void> {
-		return this.http.delete<void>(`http://localhost:8080/api/tags/${tag}/groups/${data.id}`);
+		return this.http.delete<void>(`${environment.apiUrl}/tags/${tag}/groups/${data.id}`);
 	}
 }
 
