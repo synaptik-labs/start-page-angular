@@ -1,6 +1,8 @@
 node_modules/
 .vscode/
 
+client/dist
 client/start-page/
+server/dist
 server/src/routes.ts
 server/config.json

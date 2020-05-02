@@ -11,6 +11,7 @@
 		"moduleResolution": "Node",
 		"sourceMap": true,
 		"experimentalDecorators": true,
+		"outDir": "dist",
 		"lib": [
 			"ES2017",
 		],

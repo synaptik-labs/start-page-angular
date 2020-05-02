@@ -1,0 +1,26 @@
+{
+  "name": "start-page-angular",
+  "version": "1.0.0",
+  "description": "This is just a simple start page project that stores its data in localStorage (for now).",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "shx": "^0.3.2"
+  },
+  "scripts": {
+    "build:client": "cd client && npm run dist",
+    "build:server": "cd server && npm run dist",
+    "dist:copy-client": "shx cp -R ./client/dist/start-page ./server/dist/public_html",
+    "dist": "npm run build:client && npm run build:server && npm run dist:copy-client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/synaptik-labs/start-page-angular.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/synaptik-labs/start-page-angular/issues"
+  },
+  "homepage": "https://github.com/synaptik-labs/start-page-angular#readme"
+}

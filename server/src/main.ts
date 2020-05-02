@@ -15,6 +15,7 @@ export class Main {
 		this.express.use(cors());
 
 		RegisterRoutes(this.express);
+		this.express.use('/', express.static('public_html'));
 	}
 }
 
