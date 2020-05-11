@@ -6,7 +6,12 @@ export class Props {
 
     private static init() : void {
         const REQUIRED_PROPS: string[] = ['MYSQL_HOST', 'MYSQL_DB', 'MYSQL_USER', 'MYSQL_PASSWORD'];
-        const config = require('../config.json');
+        let config: any = {}
+        try {
+            config = require('../config.json');
+        } catch (e) {
+            Logger.info(`Unable to find config.json file. Skipping.`);
+        }
         this._props = new Map<string, string>();
 
         for (let propKey of REQUIRED_PROPS) {
@@ -15,6 +20,7 @@ export class Props {
     }
 
     public static get(key: string): string {
+        
         if (!this._props) {
             this.init();
         }
